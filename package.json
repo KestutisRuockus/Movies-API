@@ -1,0 +1,11 @@
+{
+  "name": "movies-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "indext.html"
+  },
+  "author": "",
+  "license": "ISC"
+}
