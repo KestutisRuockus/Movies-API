@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <img
+        class="logo"
+        src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg"
+        alt=""
+      />
+      <img id="watchlist" class="watchlist" src="./img/watchlist.png" alt="" />
+    </header>
+
+    <nav class="navbar">
+      <button type="button" class="btn">HOME</button>
+      <button type="button" class="btn">TRENDING</button>
+      <!-- <button type="button" class="btn">GENRE</button> -->
+      <button type="button" class="btn">SEARCH</button>
+      <input class="input" type="text" placeholder="movie name" />
+      <button type="button" class="btn btn-lg btn-danger">SORT</button>
+      <!-- <button class="btn">GENRE</labebutton> -->
+      <form>
+        <select>
+          <option value="">SELECT GENRE</option>
+          <option id="28" value="Action">Action</option>
+          <option id="12" value="Adventure">Adventure</option>
+          <option id="16" value="Animation">Animation</option>
+          <option id="35" value="Comedy">Comedy</option>
+          <option id="99" value="Documentary">Documentary</option>
+          <option id="18" value="Drama">Drama</option>
+        </select>
+      </form>
+    </nav>
+
+    <!-- section 1 -- SEARCHED/SELECTED/SORTED LISTS -- at the beginning will be hidden -->
+    <section class="section1">
+      <div>
+        <h3 class="your-watchlist">YOUR WATCHLIST:</h3>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+          <li>Item 5</li>
+        </ul>
+        <ul>
+          <li>Item 6</li>
+          <li>Item 7</li>
+          <li>Item 8</li>
+          <li>Item 9</li>
+          <li>Item 10</li>
+        </ul>
+      </div>
+      <button class="btn load-more">LOAD MORE...</button>
+    </section>
+
+    <!-- section 2 -- APPEARS ON TOP OF OTHER SECTIONS TO DISPLAY SELECTED MOVIE INFO -- at the beginning will be hidden -->
+    <section class="section2">
+      <div>
+        <img class="section2-image" src="./img/noImage.png" alt="" />
+      </div>
+      <div class="movie-info">
+        <h1>TITLE</h1>
+        <div class="info-row">
+          <p>Date</p>
+          <p>Genre</p>
+          <p>Rating</p>
+        </div>
+        <div class="info-collumn">
+          <h3>OVERVIEW:</h3>
+          <ul>
+            <li>example</li>
+          </ul>
+          <h3>DIRECTOR:</h3>
+          <ul class="list-li">
+            <li>example</li>
+            <li>example</li>
+          </ul>
+          <h3>CAST:</h3>
+          <ul class="list-li">
+            <li>example</li>
+            <li>example</li>
+            <li>example</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- section 3 -- SLIDESHOW-->
+    <section class="section3">
+      <h6 class="section3-trending">TOP 10 TRENDING</h6>
+      <div class="trending-movie">
+        <button id="arrow-left" class="arrow-left"><img  src="./img/previous.png" alt=""></button>
+        <img src="./img/noImage.png" alt="">
+        <h3>The Example ;D</h3>
+        <button id="arrow-right" class="arrow-right"><img  src="./img/next.png" alt=""></button>
+      </div>
+      </button>
+    </section>
+
+    
+  </body>
+</html>

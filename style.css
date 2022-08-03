@@ -1,0 +1,250 @@
+body {
+  background: linear-gradient(0.25turn, #0d253f, #90cea1, #01b4e4);
+}
+
+/*------------------------------------------------*/
+/* HEADER */
+/*------------------------------------------------*/
+
+.logo {
+  width: 1500px;
+}
+
+header {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+/* NAVBAR */
+
+.input {
+  font-size: 30px;
+  height: 60px;
+  border-radius: 25px;
+  padding-left: 40px;
+}
+
+.btn {
+  font-size: 30px;
+  width: 250px;
+  padding: 15px;
+  margin-left: 25px;
+  margin-right: 25px;
+  font-weight: bold;
+  background: linear-gradient(#90cea1, #0d253f);
+  /* background-color: #01b4e4; */
+  border-color: #fff;
+  color: #fff;
+  border-radius: 25px;
+  height: 70px;
+}
+
+.btn:hover {
+  background-color: #01b4e4;
+  box-shadow: 10px 10px #666;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.watchlist {
+  margin-left: 50px;
+  width: 200px;
+  height: 200px;
+}
+
+.watchlist:active {
+  background-color: #0d253f;
+  box-shadow: 0 5px #666;
+}
+
+.watchlist:hover {
+  background-color: #01b4e4;
+}
+
+select {
+  font-size: 40px;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 25px;
+  background: linear-gradient(#90cea1, #0d253f);
+  color: #fff;
+  border-color: #fff;
+}
+
+option {
+  color: #000;
+}
+/*------------------------------------------------*/
+/* SECTION1 */
+/*------------------------------------------------*/
+
+/* section1 - at the beginning hidden. appears only on search/wathclist/select genre actions */
+.section1 {
+  text-align: center;
+  visibility: visible;
+}
+
+.section1 ul {
+  display: flex;
+  justify-content: center;
+}
+
+.section1 li {
+  margin-top: 10px;
+  margin-right: 50px;
+  list-style-type: none;
+  font-size: 20px;
+}
+
+.load-more {
+  margin: 30px;
+  visibility: visible;
+}
+
+/* used when 'watchlist' displayed */
+.your-watchlist {
+  font-size: 36px;
+  visibility: hidden;
+}
+
+/*------------------------------------------------*/
+/* SECTION2 - window about slected/clicked film. Appears only when clicked on film */
+/*------------------------------------------------*/
+
+.section2 {
+  border: solid #000;
+  width: 60%;
+  height: 700px;
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 100px;
+  visibility: visible;
+}
+
+.section2 img {
+  height: 600px;
+  width: 500;
+}
+
+.movie-info {
+  height: 600px;
+  width: 500;
+  font-size: 20px;
+  margin-left: -400px;
+}
+
+.movie-info h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.info-row p {
+  margin-right: 20px;
+}
+
+.info-collumn ul {
+  font-weight: bold;
+}
+
+.info-collumn li {
+  font-weight: normal;
+  list-style-type: none;
+}
+
+.list-li li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/*------------------------------------------------*/
+/* SECTION3 - trending films section */
+/*------------------------------------------------*/
+
+.section3 {
+  height: 500px;
+  width: 1200px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  border-top: 5px solid #000;
+  border-bottom: 5px solid #000;
+  padding-bottom: 100px;
+}
+
+/* slideshow  */
+
+.section3-trending {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.arrow-left {
+  width: 100px;
+  height: 60px;
+  background-color: transparent;
+  border: solid 5px #000;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 100px;
+}
+
+.arrow-left:active {
+  background-color: #0d253f;
+  box-shadow: 0 5px #666;
+}
+
+.arrow-left img {
+  width: 30px;
+  height: 30px;
+}
+
+.arrow-right {
+  width: 100px;
+  height: 60px;
+  background-color: transparent;
+  border: solid 5px #000;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 100px;
+}
+
+.arrow-right:active {
+  background-color: #0d253f;
+  box-shadow: 0 5px #666;
+}
+
+.arrow-right img {
+  width: 30px;
+  height: 30px;
+}
+
+.trending-movie {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.trending-movie img {
+  width: 20%;
+  height: 80%;
+}
+
+.trending-movie h3 {
+  font-size: 36px;
+  width: 250px;
+  text-align: center;
+  padding: 70px 0;
+}
