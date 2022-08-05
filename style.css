@@ -1,5 +1,7 @@
 body {
   background: linear-gradient(0.25turn, #0d253f, #90cea1, #01b4e4);
+  width: 80%;
+  margin: auto;
 }
 
 /*------------------------------------------------*/
@@ -112,13 +114,31 @@ option {
   visibility: hidden;
 }
 
+#section1-movie {
+  display: flex;
+  justify-content: center;
+}
+
+#section1-list li {
+  margin: auto;
+  width: 150px;
+  font-size: 30px;
+  padding-right: 60px;
+}
+
+#section1-list img {
+  width: 150px;
+  margin-right: 15px;
+  margin: auto;
+}
+
 /*------------------------------------------------*/
 /* SECTION2 - window about slected/clicked film. Appears only when clicked on film */
 /*------------------------------------------------*/
 
 .section2 {
   border: solid #000;
-  width: 60%;
+  width: 80%;
   height: 700px;
   position: relative;
   margin: auto;
@@ -173,8 +193,8 @@ option {
 /*------------------------------------------------*/
 
 .section3 {
-  height: 500px;
-  width: 1200px;
+  height: 10%;
+  width: 80%;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 50px;

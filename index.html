@@ -21,8 +21,8 @@
       <button type="button" class="btn">HOME</button>
       <button type="button" class="btn">TRENDING</button>
       <!-- <button type="button" class="btn">GENRE</button> -->
-      <button type="button" class="btn">SEARCH</button>
-      <input class="input" type="text" placeholder="movie name" />
+      <button id="btn-search" type="button" class="btn">SEARCH</button>
+      <input id="input-search" class="input" type="text" placeholder="movie name" />
       <button type="button" class="btn btn-lg btn-danger">SORT</button>
       <!-- <button class="btn">GENRE</labebutton> -->
       <form>
@@ -40,21 +40,9 @@
 
     <!-- section 1 -- SEARCHED/SELECTED/SORTED LISTS -- at the beginning will be hidden -->
     <section class="section1">
-      <div>
+      <div id="section1-div">
         <h3 class="your-watchlist">YOUR WATCHLIST:</h3>
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-          <li>Item 5</li>
-        </ul>
-        <ul>
-          <li>Item 6</li>
-          <li>Item 7</li>
-          <li>Item 8</li>
-          <li>Item 9</li>
-          <li>Item 10</li>
+        <ul id="section1-list">
         </ul>
       </div>
       <button class="btn load-more">LOAD MORE...</button>
@@ -104,6 +92,6 @@
       </button>
     </section>
 
-    
+    <script type="module" src="/controller.js"></script>
   </body>
 </html>
