@@ -20,11 +20,9 @@
     <nav class="navbar">
       <button type="button" class="btn">HOME</button>
       <button type="button" class="btn">TRENDING</button>
-      <!-- <button type="button" class="btn">GENRE</button> -->
       <button id="btn-search" type="button" class="btn">SEARCH</button>
       <input id="input-search" class="input" type="text" placeholder="movie name" />
-      <button type="button" class="btn btn-lg btn-danger">SORT</button>
-      <!-- <button class="btn">GENRE</labebutton> -->
+      <button type="button" class="btn">SORT</button>
       <form>
         <select>
           <option value="">SELECT GENRE</option>
@@ -45,7 +43,11 @@
         <ul id="section1-list">
         </ul>
       </div>
-      <button class="btn load-more">LOAD MORE...</button>
+      <div id="pages-container">
+        <button id="previous-page" class="btn btn-page">PREVIOUS PAGE</button>
+        <h1 id="page-number">Page: 1</h1>
+        <button id="next-page" class="btn btn-page">NEXT PAGE</button>
+      </div>
     </section>
 
     <!-- section 2 -- APPEARS ON TOP OF OTHER SECTIONS TO DISPLAY SELECTED MOVIE INFO -- at the beginning will be hidden -->

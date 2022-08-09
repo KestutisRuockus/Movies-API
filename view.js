@@ -1,14 +1,21 @@
 // Get data and render to UI into section1
-export const renderList = function (data) {
+// @data - returned movies info
+// @page - get current page number
+export const renderList = function (data, page) {
   let list = data;
-  console.log(list);
+  if (data === undefined) {
+    // check or there is any data returned
+    return;
+  }
+
+  // set pages buttons container visible
+  document.getElementById("pages-container").style.visibility = "visible";
 
   let sectionList = document.getElementById("section1-list");
   const section1Div = document.getElementById("section1-div");
-  // if (sectionList != undefined) sectionList.remove();
+
   if (document.body.contains(sectionList)) {
     sectionList.remove();
-    console.log("ELEMENT DELETED");
   }
   sectionList = document.createElement("ul");
   sectionList.setAttribute("id", "section1-list");
@@ -28,5 +35,6 @@ export const renderList = function (data) {
     section1Movie.appendChild(img);
     section1Movie.appendChild(li);
     li.appendChild(liText);
+    document.getElementById("page-number").textContent = `Page: ${page}`;
   }
 };

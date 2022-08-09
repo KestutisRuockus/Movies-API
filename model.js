@@ -1,12 +1,14 @@
 import { API_URL, API_KEY } from "./config.js";
 
 // Get movies list by search input
-export const getQuery = async function () {
+// @page - from which page get movies
+// @return - movies data {"id", "title"}
+export const getQuery = async function (page) {
   let list = {};
   const inputSearch = document.getElementById("input-search"); // search input
   let query = inputSearch.value;
 
-  let api = `${API_URL}search/movie${API_KEY}&language=en-US&query=${query}&include_adult=false`; // path to Database
+  let api = `${API_URL}search/movie${API_KEY}&language=en-US&query=${query}&include_adult=false&page=${page}`; // query to API - themoviedb.org
   api = api.replaceAll(" ", "%20"); // symbol '%20' required to get correct query when user use more than on word in search. Replaces users empty inputs into "%20"
 
   // checks or input is not empty. If query exist it puts results into Object{"id, "title"}
@@ -18,19 +20,23 @@ export const getQuery = async function () {
     await fetch(api)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        const dataLength = data.total_results; // get data list length
-        for (let i = 0; i < 5; i++) {
-          // i.length manually selected length - must be list.length. list length must be handled - sometimes it is to long and throws error
-          list[i] = { id: data.results[i].id, title: data.results[i].title };
+        const totalPages = data.total_pages; // how many pages founded
+        const totalResults = data.total_results; // how many results received
+        let listLength = 20; // deafault page length
+
+        if (totalPages === page) listLength = totalResults % listLength; // if page is not full (not 20 items) then set length of left items
+
+        for (let i = 0; i < listLength; i++) {
+          list[i] = {
+            id: data.results[i].id,
+            title: data.results[i].title,
+          };
         }
       })
-      .catch(
-        (err) =>
-          alert(`Nothing has been found! \r\n
-           Please try again!`) + console.log(err)
-      );
-    console.log(list);
+      .catch(() => {
+        alert(`Nothing has been found! \r\n
+        Please try again!`);
+      });
     return list;
   }
 };
