@@ -9,7 +9,7 @@ const btnPreviousPage = document.getElementById("previous-page");
 
 // get movies list by search query and render to the UI in 'section1'
 const loadList = async function () {
-  const list = await model.getQuery(page);
+  const list = await model.searchMovies(page);
   view.renderList(list, page);
 };
 

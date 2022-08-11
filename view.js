@@ -2,9 +2,8 @@
 // @data - returned movies info
 // @page - get current page number
 export const renderList = function (data, page) {
-  let list = data;
-  if (data === undefined) {
-    // check or there is any data returned
+  // check or there is any data returned
+  if (data.totalResults === "" || data === undefined) {
     return;
   }
 
@@ -14,6 +13,7 @@ export const renderList = function (data, page) {
   let sectionList = document.getElementById("section1-list");
   const section1Div = document.getElementById("section1-div");
 
+  // if it is not first search made we need to remove/clear 'section1' - remove/clear list before rendering other list
   if (document.body.contains(sectionList)) {
     sectionList.remove();
   }
@@ -21,15 +21,36 @@ export const renderList = function (data, page) {
   sectionList.setAttribute("id", "section1-list");
   section1Div.appendChild(sectionList);
 
+  const totalPages = data.totalPages; // how many pages founded
+  const totalResults = data.totalResults; // how many results received
+  let listLength = 20; // deafault page length
+
+  if (totalPages === page) {
+    listLength = totalResults % listLength; // if page is not full (not 20 items) then set length of left items
+  }
+
+  // if it is first page - hide 'previous page' button
+  if (page === 1) {
+    document.getElementById("previous-page").style.visibility = "hidden";
+  } else {
+    document.getElementById("previous-page").style.visibility = "visible";
+  }
+  // if it is last page - hide 'next page' button
+  if (page === totalPages) {
+    document.getElementById("next-page").style.visibility = "hidden";
+  } else {
+    document.getElementById("next-page").style.visibility = "visible";
+  }
+
   // Creates elements and appends them
-  for (let i = 0; i < Object.keys(list).length; i++) {
+  for (let i = 0; i < listLength; i++) {
     const section1Movie = document.createElement("div");
     section1Movie.setAttribute("id", "section1-movie");
     const img = document.createElement("img");
     img.setAttribute("src", "./img/noImage.png");
     const li = document.createElement("li");
-    li.setAttribute("id", list[i].id);
-    const liText = document.createTextNode(list[i].title);
+    li.setAttribute("id", data.movies[i].id);
+    const liText = document.createTextNode(data.movies[i].title);
 
     sectionList.appendChild(section1Movie);
     section1Movie.appendChild(img);
