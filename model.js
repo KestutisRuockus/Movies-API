@@ -32,10 +32,10 @@ export const searchMovies = async function (page) {
     await fetch(api)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (Object.keys(data.results).length === 0) {
           alert(`Nothing has been found! \r\n
           Please try again!`);
+          inputSearch.value = "";
           return;
         }
         // put data into object

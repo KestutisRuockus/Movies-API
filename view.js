@@ -1,7 +1,14 @@
+import { POSTER_URL } from "./config.js";
+
+let imgSize; // going to be used to set poster size
+let posterUrl; // if there poster url does not exist then show 'noImage" img
+
 // Get data and render to UI into section1
 // @data - returned movies info
 // @page - get current page number
 export const renderList = function (data, page) {
+  imgSize = "w154";
+
   // check or there is any data returned
   if (data.totalResults === "" || data === undefined) {
     return;
@@ -47,7 +54,15 @@ export const renderList = function (data, page) {
     const section1Movie = document.createElement("div");
     section1Movie.setAttribute("id", "section1-movie");
     const img = document.createElement("img");
-    img.setAttribute("src", "./img/noImage.png");
+
+    // Check or poster url exist and set url path
+    if (data.movies[i].posterPath === null) {
+      posterUrl = "./img/noImage.png";
+    } else {
+      posterUrl = `${POSTER_URL}${imgSize}${data.movies[i].posterPath}`;
+    }
+
+    img.setAttribute("src", posterUrl);
     const li = document.createElement("li");
     li.setAttribute("id", data.movies[i].id);
     const liText = document.createTextNode(data.movies[i].title);
