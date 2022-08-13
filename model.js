@@ -1,9 +1,9 @@
 import { API_URL, API_KEY } from "./config.js";
 
-// Get movies list by search input
-// @page - from which page get movies. API returns 20 movies per page
-// @return - movies results
-export const searchMovies = async function (page) {
+// put data into object. This function used for search, for getting trending movies
+// @data - received object by query
+// return - object
+export const getInfo = function (data) {
   let list = {
     movies: {
       id: "",
@@ -17,6 +17,42 @@ export const searchMovies = async function (page) {
     totalPages: "",
     totalResults: "",
   };
+
+  list.totalPages = data.total_pages;
+  list.totalResults = data.total_results;
+  list.movies = data.results.map((results) => {
+    return {
+      id: results.id,
+      title: results.title,
+      overview: results.overview,
+      posterPath: results.poster_path,
+      releaseDate: results.release_date,
+      voteRating: results.vote_average,
+      genre: results.genre_ids,
+    };
+  });
+
+  return list;
+};
+
+// Get movies list by search input
+// @page - from which page get movies. API returns 20 movies per page
+// @return - movies results
+export const searchMovies = async function (page) {
+  let list;
+  // let list = {
+  //   movies: {
+  //     id: "",
+  //     title: "",
+  //     overview: "",
+  //     posterPath: "",
+  //     releaseDate: "",
+  //     voteRating: "",
+  //     genre: [],
+  //   },
+  //   totalPages: "",
+  //   totalResults: "",
+  // };
   const inputSearch = document.getElementById("input-search"); // search input
   let query = inputSearch.value;
 
@@ -38,20 +74,22 @@ export const searchMovies = async function (page) {
           inputSearch.value = "";
           return;
         }
+        list = getInfo(data);
+
         // put data into object
-        list.totalPages = data.total_pages;
-        list.totalResults = data.total_results;
-        list.movies = data.results.map((results) => {
-          return {
-            id: results.id,
-            title: results.title,
-            overview: results.overview,
-            posterPath: results.poster_path,
-            releaseDate: results.release_date,
-            voteRating: results.vote_average,
-            genre: results.genre_ids,
-          };
-        });
+        // list.totalPages = data.total_pages;
+        // list.totalResults = data.total_results;
+        // list.movies = data.results.map((results) => {
+        //   return {
+        //     id: results.id,
+        //     title: results.title,
+        //     overview: results.overview,
+        //     posterPath: results.poster_path,
+        //     releaseDate: results.release_date,
+        //     voteRating: results.vote_average,
+        //     genre: results.genre_ids,
+        //   };
+        // });
       })
       .catch((err) => {
         console.log(err);
@@ -59,4 +97,18 @@ export const searchMovies = async function (page) {
       });
     return list;
   }
+};
+
+// Get top 20 trending movies list of the week
+// return - list of movies
+export const getTrendingMovies = async function () {
+  let api = `${API_URL}trending/movie/week${API_KEY}`;
+  let list;
+
+  await fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      list = getInfo(data);
+    });
+  return list;
 };

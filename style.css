@@ -25,6 +25,7 @@ header {
   height: 60px;
   border-radius: 25px;
   padding-left: 40px;
+  margin-right: 25px;
 }
 
 .btn {
@@ -89,7 +90,7 @@ option {
 /* section1 - at the beginning hidden. appears only on search/wathclist/select genre actions */
 .section1 {
   text-align: center;
-  visibility: visible;
+  visibility: hidden;
 }
 
 .section1 ul {
@@ -121,9 +122,8 @@ option {
 }
 
 /* used when 'watchlist' displayed */
-.your-watchlist {
-  font-size: 36px;
-  visibility: hidden;
+.section1-name {
+  font-size: 50px;
 }
 
 #section1-movie {
@@ -179,7 +179,7 @@ option {
   display: flex;
   justify-content: space-around;
   padding-top: 100px;
-  visibility: visible;
+  visibility: hidden;
 }
 
 .section2 img {
@@ -245,6 +245,13 @@ option {
   margin-bottom: 0px;
 }
 
+.section3 h4 {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 125px;
+  text-decoration: underline;
+}
+
 .arrow-left {
   width: 100px;
   height: 60px;
@@ -253,6 +260,7 @@ option {
   border-radius: 25px;
   padding: 10px;
   margin-top: 100px;
+  margin-right: 100px;
 }
 
 .arrow-left:active {
@@ -273,6 +281,7 @@ option {
   border-radius: 25px;
   padding: 10px;
   margin-top: 100px;
+  margin-left: 100px;
 }
 
 .arrow-right:active {
@@ -288,7 +297,7 @@ option {
 .trending-movie {
   margin-top: 100px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .trending-movie img {
@@ -301,4 +310,5 @@ option {
   width: 250px;
   text-align: center;
   padding: 70px 0;
+  margin-left: 50px;
 }

@@ -18,11 +18,10 @@
     </header>
 
     <nav class="navbar">
-      <button type="button" class="btn">HOME</button>
-      <button type="button" class="btn">TRENDING</button>
+      <button id="btn-home" type="button" class="btn">HOME</button>
+      <button id="btn-trending" type="button" class="btn">TRENDING</button>
       <button id="btn-search" type="button" class="btn">SEARCH</button>
       <input id="input-search" class="input" type="text" placeholder="movie name" />
-      <button type="button" class="btn">SORT</button>
       <form>
         <select>
           <option value="">SELECT GENRE</option>
@@ -37,9 +36,9 @@
     </nav>
 
     <!-- section 1 -- SEARCHED/SELECTED/SORTED LISTS -- at the beginning will be hidden -->
-    <section class="section1">
+    <section id="section1" class="section1">
       <div id="section1-div">
-        <h3 class="your-watchlist">YOUR WATCHLIST:</h3>
+        <h3 id="section1-name" class="section1-name"></h3>
         <ul id="section1-list">
         </ul>
       </div>
@@ -51,7 +50,7 @@
     </section>
 
     <!-- section 2 -- APPEARS ON TOP OF OTHER SECTIONS TO DISPLAY SELECTED MOVIE INFO -- at the beginning will be hidden -->
-    <section class="section2">
+    <!-- <section id="section2" class="section2">
       <div>
         <img class="section2-image" src="./img/noImage.png" alt="" />
       </div>
@@ -80,15 +79,16 @@
           </ul>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- section 3 -- SLIDESHOW-->
-    <section class="section3">
-      <h6 class="section3-trending">TOP 10 TRENDING</h6>
+    <section id="section3" class="section3">
+      <h6 class="section3-trending">TOP 20 TRENDING MOVIES OF THE WEEK</h6>
+      <h4 id="trending-movie-number" class="section3-trending"></h4>
       <div class="trending-movie">
         <button id="arrow-left" class="arrow-left"><img  src="./img/previous.png" alt=""></button>
-        <img src="./img/noImage.png" alt="">
-        <h3>The Example ;D</h3>
+        <img id="slide-poster" src="./img/noImage.png" alt="">
+        <h3 id="trending-slide-title">The Example ;D</h3>
         <button id="arrow-right" class="arrow-right"><img  src="./img/next.png" alt=""></button>
       </div>
       </button>
