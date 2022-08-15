@@ -55,6 +55,9 @@ export const renderList = function (data, page, isPaginationRequired = false) {
   for (let i = 0; i < listLength; i++) {
     const section1Movie = document.createElement("div");
     section1Movie.setAttribute("id", "section1-movie");
+    section1Movie.addEventListener("click", function () {
+      showSelectedMovieInfo(data.movies[i]);
+    });
     const img = document.createElement("img");
 
     // Check or poster url exist and set url path
@@ -124,4 +127,80 @@ export const trendingMoviesSlide = function (list, TrendingListindex) {
   title.textContent = list.movies[TrendingListindex].title;
   movieTopPlace.textContent = `NUMBER: ${TrendingListindex + 1}`;
   poster.setAttribute("src", posterUrl);
+};
+
+const showSelectedMovieInfo = (movie) => {
+  section2.style.visibility = "visible";
+  imgSize = "w500";
+  let genreList = [];
+  let genreLength;
+
+  if (movie.genre.length < 4) {
+    genreLength = movie.genre.length;
+  } else {
+    genreLength = 3;
+  }
+
+  for (let i = 0; i < genreLength; i++) {
+    genreList.push(movie.genre[i]);
+  }
+
+  let moviePoster = document.getElementById("movie-poster");
+  // Check or poster url exist and set url path
+  if (movie.posterPath === null) {
+    posterUrl = "./img/noImage.png";
+  } else {
+    posterUrl = `${POSTER_URL}${imgSize}${movie.posterPath}`;
+  }
+
+  moviePoster.setAttribute("src", posterUrl);
+  const movieTitle = document.getElementById("movie-title");
+  movieTitle.textContent = movie.title;
+  const movieReleaseDate = document.getElementById("movie-date");
+  movieReleaseDate.textContent = `Release Date: ${movie.releaseDate}`;
+  const movieRating = document.getElementById("movie-rating");
+  movieRating.textContent = `Rating: ${movie.voteRating}`;
+  const movieOverview = document.getElementById("movie-overview");
+  movieOverview.textContent = movie.overview;
+  let movieGenre = document.getElementById("movie-genre");
+
+  const genreDivForList = document.getElementById("genre-div");
+  // if it is not first search made we need to remove/clear 'section1' - remove/clear list before rendering other list
+  if (document.body.contains(movieGenre)) {
+    movieGenre.remove();
+  }
+  movieGenre = document.createElement("div");
+  movieGenre.setAttribute("id", "movie-genre");
+  movieGenre.setAttribute("class", "movie-info-genre");
+  genreDivForList.appendChild(movieGenre);
+
+  genreList.forEach((element) => {
+    switch (element) {
+      case 28:
+        element = "Action";
+        break;
+      case 12:
+        element = "Adventure";
+        break;
+      case 16:
+        element = "Animation";
+        break;
+      case 35:
+        element = "Comedy";
+        break;
+      case 99:
+        element = "Documentary";
+        break;
+      case 18:
+        element = "Drama";
+        break;
+    }
+
+    if (typeof element === "string") {
+      const pElement = document.createElement("p");
+      const pText = document.createTextNode(element);
+      pElement.appendChild(pText);
+      movieGenre.appendChild(pElement);
+    }
+  });
 };

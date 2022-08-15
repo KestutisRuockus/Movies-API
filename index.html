@@ -37,7 +37,7 @@
 
     <!-- section 1 -- SEARCHED/SELECTED/SORTED LISTS -- at the beginning will be hidden -->
     <section id="section1" class="section1">
-      <div id="section1-div">
+      <div id="section1-div" class="section1-div">
         <h3 id="section1-name" class="section1-name"></h3>
         <ul id="section1-list">
         </ul>
@@ -50,36 +50,29 @@
     </section>
 
     <!-- section 2 -- APPEARS ON TOP OF OTHER SECTIONS TO DISPLAY SELECTED MOVIE INFO -- at the beginning will be hidden -->
-    <!-- <section id="section2" class="section2">
+    <section id="section2" class="section2">
       <div>
-        <img class="section2-image" src="./img/noImage.png" alt="" />
+        <img id="movie-poster" class="section2-image" alt="" />
       </div>
+      <button id="close-movie-info" class="btn close-movie-info">X</button>
+      <img id="movie-info-watchlist" class="watchlist" src="./img/watchlist.png" alt="" />
       <div class="movie-info">
-        <h1>TITLE</h1>
+        <h1 id="movie-title">TITLE:</h1>
         <div class="info-row">
-          <p>Date</p>
-          <p>Genre</p>
-          <p>Rating</p>
+          <p id="movie-date">Date</p>
+          <p id="movie-rating">Rating</p>
+        </div>
+        <h3>GENRE:</h3>
+        <div id="genre-div">
+          <div id="movie-genre" class="movie-info-genre">
+          </div>
         </div>
         <div class="info-collumn">
           <h3>OVERVIEW:</h3>
-          <ul>
-            <li>example</li>
-          </ul>
-          <h3>DIRECTOR:</h3>
-          <ul class="list-li">
-            <li>example</li>
-            <li>example</li>
-          </ul>
-          <h3>CAST:</h3>
-          <ul class="list-li">
-            <li>example</li>
-            <li>example</li>
-            <li>example</li>
-          </ul>
+          <p id="movie-overview">example</p>
         </div>
       </div>
-    </section> -->
+    </section>
 
     <!-- section 3 -- SLIDESHOW-->
     <section id="section3" class="section3">

@@ -16,6 +16,7 @@ const btnPreviousPage = document.getElementById("previous-page");
 const btnTrending = document.getElementById("btn-trending");
 const btnHome = document.getElementById("btn-home");
 const selectGenre = document.getElementById("navbar-genre");
+const closeMovieWindow = document.getElementById("close-movie-info");
 
 // section3 - top trending slides
 let btnSlideLeft = document.getElementById("arrow-left");
@@ -133,4 +134,10 @@ selectGenre.addEventListener("change", async function () {
   }
 
   loadGenreList(genreValue);
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target === closeMovieWindow) {
+    document.getElementById("section2").style.visibility = "hidden";
+  }
 });
