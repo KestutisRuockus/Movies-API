@@ -3,6 +3,8 @@ import * as view from "./view.js";
 
 let page = 1; // from which page get list
 let trendingSlidesIndex = 0; // used to show/get another movie slide
+let genreValue = ""; // genre ID. Used to go trhough genres pages
+let isGenreList = false; // to know or pagination buttons should be used. Trending list does not have pagination.
 
 // get trending movies list. Used to show slides in section3 at the page load
 const trendingMoviesList = await model.getTrendingMovies();
@@ -13,6 +15,7 @@ const btnNextPage = document.getElementById("next-page");
 const btnPreviousPage = document.getElementById("previous-page");
 const btnTrending = document.getElementById("btn-trending");
 const btnHome = document.getElementById("btn-home");
+const selectGenre = document.getElementById("navbar-genre");
 
 // section3 - top trending slides
 let btnSlideLeft = document.getElementById("arrow-left");
@@ -24,40 +27,65 @@ view.homePage();
 // load trending slide - section3
 view.trendingMoviesSlide(trendingMoviesList, trendingSlidesIndex);
 
+// get genre list by selected dropdown option and render to UI in 'section1'
+//@genreValue - this is id of genre
+const loadGenreList = async function (genreValue) {
+  isGenreList = true;
+  if (genreValue === "") {
+    genreValue = selectGenre.value;
+  }
+  const list = await model.getMoviesByGenre(genreValue, page);
+  view.renderList(list, page, true);
+  document.getElementById("section3").style.visibility = "visible";
+};
+
 // get movies list by search query and render to the UI in 'section1'
 const loadList = async function () {
   const list = await model.searchMovies(page);
-  view.renderList(list, page);
+  view.renderList(list, page, true);
 };
 
 // Search for the movies
 btnSearch.addEventListener("click", function () {
   page = 1; // get back to deafault page number
+  selectGenre.selectedIndex = 0;
+  isGenreList = false;
   loadList();
 });
 
 // Go to the next page of list
 btnNextPage.addEventListener("click", function () {
   page++; // incrase page
-  loadList();
+  if (isGenreList !== true) {
+    loadList();
+  } else {
+    loadGenreList(genreValue);
+  }
 });
 
 // Go to the previous page of list
 btnPreviousPage.addEventListener("click", function () {
   page--; // dearease page
-  loadList();
+  if (isGenreList !== true) {
+    loadList();
+  } else {
+    loadGenreList(genreValue);
+  }
 });
 
 // Show Top 20 Trending movies
 btnTrending.addEventListener("click", async function () {
+  selectGenre.selectedIndex = 0;
   const list = await model.getTrendingMovies();
-  view.renderList(list, page, "Top 20 Trending Movies");
+  view.renderList(list, page, false);
 });
 
 // return to page to starting position
 btnHome.addEventListener("click", function () {
   page = 1;
   trendingSlidesIndex = 0;
+  genreValue = "";
+  selectGenre.selectedIndex = 0;
   view.homePage();
   view.trendingMoviesSlide(trendingMoviesList, trendingSlidesIndex);
 });
@@ -93,3 +121,16 @@ setInterval(function () {
   }
   view.trendingMoviesSlide(trendingMoviesList, trendingSlidesIndex);
 }, 5000);
+
+// Get movies list filtered by genre
+selectGenre.addEventListener("change", async function () {
+  page = 1;
+  let sectionName = selectGenre.options[selectGenre.selectedIndex].text;
+  // if user select "SELECT GENRE" option in dropdown list then refresh page - clear everything
+  if (sectionName === "SELECT GENRE") {
+    view.homePage();
+    return;
+  }
+
+  loadGenreList(genreValue);
+});

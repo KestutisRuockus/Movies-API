@@ -11,12 +11,12 @@ let sectionList = document.getElementById("section1-list");
 // Get data and render to UI into section1
 // @data - returned movies info
 // @page - get current page number
-// @sectionName - appears segment's name when button 'Trending' clicked
-export const renderList = function (data, page, sectionName = "") {
+// @isPaginationRequired - or pagination buttons container must be visible
+export const renderList = function (data, page, isPaginationRequired = false) {
   imgSize = "w154";
 
   // check or there is any data returned
-  if (data.totalResults === "" || data === undefined) {
+  if (data === undefined) {
     return;
   }
 
@@ -79,13 +79,12 @@ export const renderList = function (data, page, sectionName = "") {
   // make section1 visible
   section1.style.visibility = "visible";
 
-  if (sectionName === "") {
-    // set pages buttons container visible
+  // check or pagination buttons must be shown
+  if (isPaginationRequired === true) {
     document.getElementById("pages-container").style.visibility = "visible";
-    section1Name.textContent = "";
     section3.style.visibility = "visible";
   } else {
-    section1Name.textContent = sectionName;
+    section1Name.textContent = "";
     document.getElementById("pages-container").style.visibility = "hidden";
     document.getElementById("next-page").style.visibility = "hidden";
     document.getElementById("previous-page").style.visibility = "hidden";

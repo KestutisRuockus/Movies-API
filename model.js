@@ -40,19 +40,6 @@ export const getInfo = function (data) {
 // @return - movies results
 export const searchMovies = async function (page) {
   let list;
-  // let list = {
-  //   movies: {
-  //     id: "",
-  //     title: "",
-  //     overview: "",
-  //     posterPath: "",
-  //     releaseDate: "",
-  //     voteRating: "",
-  //     genre: [],
-  //   },
-  //   totalPages: "",
-  //   totalResults: "",
-  // };
   const inputSearch = document.getElementById("input-search"); // search input
   let query = inputSearch.value;
 
@@ -110,5 +97,23 @@ export const getTrendingMovies = async function () {
     .then((data) => {
       list = getInfo(data);
     });
+  return list;
+};
+
+// get filtered movies by selected genry
+//@genre = movie genre id
+//@page - which page select. API returns 20 items per page
+//@return - filtered list
+export const getMoviesByGenre = async function (genre, page) {
+  let list;
+
+  let api = `${API_URL}discover/movie${API_KEY}&with_genres=${genre}&page=${page}`;
+
+  await fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      list = getInfo(data);
+    });
+
   return list;
 };
