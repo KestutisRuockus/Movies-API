@@ -117,3 +117,62 @@ export const getMoviesByGenre = async function (genre, page) {
 
   return list;
 };
+
+// get movie object and add to localstorage
+//@movieId - current movie info by his id.
+export const addToWatchlist = async function (movieId) {
+  let movie = {
+    id: "",
+    title: "",
+    overview: "",
+    posterPath: "",
+    releaseDate: "",
+    voteRating: "",
+    genre: [],
+  };
+
+  const api = `${API_URL}movie/${movieId}${API_KEY}&language=en-US`;
+
+  await fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      movie.id = data.id;
+      movie.title = data.title;
+      movie.overview = data.overview;
+      movie.posterPath = data.poster_path;
+      movie.releaseDate = data.release_date;
+      movie.voteRating = data.vote_average;
+      movie.genre = data.genres;
+    });
+
+  // setItem in loacalstorage
+  localStorage.setItem(movie.id, JSON.stringify(movie));
+};
+
+// delete item from localstorage
+//@movieId - current movie ID
+export const deleteMovieFromWatchlist = function (movieId) {
+  localStorage.removeItem(movieId);
+};
+
+// load all movies from localstorage
+export const getAllMoviesFromLocalstorage = function () {
+  let list = {
+    movies: [],
+  };
+  let keysList = [];
+
+  let movies = Object.keys(localStorage);
+  let i = movies.length;
+
+  // get all keys into list from localstorage
+  while (i--) {
+    keysList.push(movies[i]);
+  }
+
+  // get all values by keys from localstorage
+  for (let item in keysList) {
+    list.movies.push(JSON.parse(localStorage.getItem(keysList[item])));
+  }
+  return list;
+};

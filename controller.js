@@ -17,6 +17,8 @@ const btnTrending = document.getElementById("btn-trending");
 const btnHome = document.getElementById("btn-home");
 const selectGenre = document.getElementById("navbar-genre");
 const closeMovieWindow = document.getElementById("close-movie-info");
+const btnMovieWindowWatchlist = document.getElementById("movie-info-watchlist");
+const btnLoadWatchlist = document.getElementById("watchlist");
 
 // section3 - top trending slides
 let btnSlideLeft = document.getElementById("arrow-left");
@@ -136,8 +138,34 @@ selectGenre.addEventListener("change", async function () {
   loadGenreList(genreValue);
 });
 
+// close 'section2' window (window where all movie info showed) on 'X' button
 document.addEventListener("click", (e) => {
   if (e.target === closeMovieWindow) {
     document.getElementById("section2").style.visibility = "hidden";
+  }
+});
+
+// button in 'section2' (window where all movie info showed)
+// add movie to localstorage or delete it from localstorage if was saved before
+btnMovieWindowWatchlist.addEventListener("click", function (e) {
+  // if it is marked/saved then delete from localsotrage
+  if (localStorage.getItem(e.target.value)) {
+    model.deleteMovieFromWatchlist(e.target.value);
+    view.setMovieUnmarked();
+    // if it is not marked/saved then save in localsotrage
+  } else {
+    model.addToWatchlist(e.target.value);
+    view.setMovieMarked();
+  }
+});
+
+// Render marked/saved movies list in 'section1' from localStorage
+btnLoadWatchlist.addEventListener("click", function () {
+  const list = model.getAllMoviesFromLocalstorage();
+  if (list.movies.length === 0) {
+    view.homePage();
+    alert("There are no movies in watchlist.");
+  } else {
+    view.renderList(list, page, false, true);
   }
 });

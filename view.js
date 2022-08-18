@@ -7,12 +7,19 @@ let section1 = document.getElementById("section1");
 let section2 = document.getElementById("section2");
 let section3 = document.getElementById("section3");
 let sectionList = document.getElementById("section1-list");
+let watchlistImage = document.getElementById("movie-info-watchlist");
 
 // Get data and render to UI into section1
 // @data - returned movies info
 // @page - get current page number
 // @isPaginationRequired - or pagination buttons container must be visible
-export const renderList = function (data, page, isPaginationRequired = false) {
+//@isDataFromLocalSotrage - if true then set localstorage list length
+export const renderList = function (
+  data,
+  page,
+  isPaginationRequired = false,
+  isDataFromLocalSotrage = false
+) {
   imgSize = "w154";
 
   // check or there is any data returned
@@ -34,7 +41,9 @@ export const renderList = function (data, page, isPaginationRequired = false) {
   const totalResults = data.totalResults; // how many results received
   let listLength = 20; // deafault page length
 
-  if (totalPages === page) {
+  if (isDataFromLocalSotrage === true) {
+    listLength = data.movies.length;
+  } else if (totalPages === page) {
     listLength = totalResults % listLength; // if page is not full (not 20 items) then set length of left items
   }
 
@@ -57,6 +66,7 @@ export const renderList = function (data, page, isPaginationRequired = false) {
     section1Movie.setAttribute("id", "section1-movie");
     section1Movie.addEventListener("click", function () {
       showSelectedMovieInfo(data.movies[i]);
+      checkIsMovieMarked(data.movies[i].id);
     });
     const img = document.createElement("img");
 
@@ -129,6 +139,8 @@ export const trendingMoviesSlide = function (list, TrendingListindex) {
   poster.setAttribute("src", posterUrl);
 };
 
+// when in filtered list clicked on movie show more info aboaut it
+// @movie - selected movie object
 const showSelectedMovieInfo = (movie) => {
   section2.style.visibility = "visible";
   imgSize = "w500";
@@ -154,6 +166,8 @@ const showSelectedMovieInfo = (movie) => {
   }
 
   moviePoster.setAttribute("src", posterUrl);
+  const movieId = document.getElementById("movie-info-watchlist");
+  movieId.value = movie.id;
   const movieTitle = document.getElementById("movie-title");
   movieTitle.textContent = movie.title;
   const movieReleaseDate = document.getElementById("movie-date");
@@ -203,4 +217,24 @@ const showSelectedMovieInfo = (movie) => {
       movieGenre.appendChild(pElement);
     }
   });
+};
+
+// Check or movie exist in localstorage and set relative 'watchlist image (Marked/Unmarked)
+//@movieId - current movie id. Search movie by this ID in localstorage
+const checkIsMovieMarked = function (movieId) {
+  if (localStorage.getItem(movieId)) {
+    setMovieMarked();
+  } else {
+    setMovieUnmarked();
+  }
+};
+
+// Set 'watchlist' image Marked (movie was saved in localstorage earlier)
+export const setMovieMarked = function () {
+  watchlistImage.setAttribute("src", "./img/watchlistRemove.png");
+};
+
+// Set 'watchlist' image unMarked (movies was not saved in localstorage)
+export const setMovieUnmarked = function () {
+  watchlistImage.setAttribute("src", "./img/watchlistAdd.png");
 };
